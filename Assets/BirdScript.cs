@@ -6,8 +6,9 @@ using UnityEngine;
 public class BirdScript : MonoBehaviour
 {
     public Rigidbody2D birdRigidBody;
-    public float flapStrength;
     public LogicScript logic;
+    public AudioSource birdFlap;
+    public float flapStrength;
     public bool gameOver = false;
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class BirdScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && gameOver == false)
         {
             birdRigidBody.velocity = Vector2.up * flapStrength;
+            birdFlap.Play();
         }
         if(transform.position.y < -17 || transform.position.y > 17)
         {
