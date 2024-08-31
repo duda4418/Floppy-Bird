@@ -409,6 +409,7 @@ MonoBehaviour:
   birdRigidBody: {fileID: 1098450291}
   logic: {fileID: 0}
   birdFlap: {fileID: 1098450294}
+  birdAnimator: {fileID: 1098450295}
   flapStrength: 20
   gameOver: 0
 --- !u!58 &1098450290
