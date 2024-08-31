@@ -11,13 +11,17 @@ public class LogicScript : MonoBehaviour
     public AudioSource addScoreDing;
     public AudioSource gameOverSound;
     public int playerScore;
+    private bool gameIsActive = true;
 
     [ContextMenu("Increase score")]
     public void addScore(int points)
     {
-        playerScore += points;
-        scoreText.text = playerScore.ToString();
-        addScoreDing.Play();
+        if(gameIsActive)
+        {
+            playerScore += points;
+            scoreText.text = playerScore.ToString();
+            addScoreDing.Play();
+        }
     }
 
     public void restartGame()
@@ -27,7 +31,11 @@ public class LogicScript : MonoBehaviour
 
     public void gameOver()
     {
-        GameOverScreen.SetActive(true);
-        gameOverSound.Play();
+        if(gameIsActive)
+        {
+            gameOverSound.Play();
+            GameOverScreen.SetActive(true);
+            gameIsActive = false;
+        }
     }
 }
