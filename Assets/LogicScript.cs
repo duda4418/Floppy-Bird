@@ -7,11 +7,19 @@ using UnityEngine.SceneManagement;
 public class LogicScript : MonoBehaviour
 {
     public Text scoreText;
+    public Text highScoreText;
     public GameObject GameOverScreen;
     public AudioSource addScoreDing;
     public AudioSource gameOverSound;
     public int playerScore;
+    private int highScore;
     private bool gameIsActive = true;
+    
+    void Start()
+    {
+        highScore = PlayerPrefs.GetInt("highscore", 0);
+        highScoreText.text = "High Score: " + highScore.ToString();
+    }
 
     [ContextMenu("Increase score")]
     public void addScore(int points)
@@ -36,6 +44,12 @@ public class LogicScript : MonoBehaviour
             gameOverSound.Play();
             GameOverScreen.SetActive(true);
             gameIsActive = false;
+        }
+        if(playerScore > highScore)
+        {
+            highScore = playerScore;
+            PlayerPrefs.SetInt("highscore", highScore);
+            highScoreText.text = "High Score: " + highScore.ToString();
         }
     }
 }
