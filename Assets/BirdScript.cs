@@ -8,6 +8,7 @@ public class BirdScript : MonoBehaviour
     public Rigidbody2D birdRigidBody;
     public LogicScript logic;
     public AudioSource birdFlap;
+    public Animator birdAnimator;
     public float flapStrength;
     public bool gameOver = false;
 
@@ -22,8 +23,10 @@ public class BirdScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && gameOver == false)
         {
+            birdAnimator.SetBool("isFlapping", true);
             birdRigidBody.velocity = Vector2.up * flapStrength;
             birdFlap.Play();
+            // birdAnimator.SetBool("isFlapping", false);   
         }
         if(transform.position.y < -17 || transform.position.y > 17)
         {
@@ -36,5 +39,9 @@ public class BirdScript : MonoBehaviour
     {
         logic.gameOver();   
         gameOver = true;
+    }
+    public void StopFlapping()
+    {
+        birdAnimator.SetBool("isFlapping", false);
     }
 }
